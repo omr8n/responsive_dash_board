@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'custom_drawer.dart';
+import 'dashboard_mobile_layout.dart';
+
 class DashBoardTabletLayout extends StatelessWidget {
   const DashBoardTabletLayout({super.key});
 
@@ -7,7 +10,7 @@ class DashBoardTabletLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Row(
       children: [
-        //  Expanded(child: CustomDrawer()),
+        Expanded(child: CustomDrawer()),
         SizedBox(
           width: 32,
         ),
@@ -15,7 +18,7 @@ class DashBoardTabletLayout extends StatelessWidget {
             flex: 3,
             child: Padding(
               padding: EdgeInsets.only(top: 40),
-              //  child: DashBoardMobileLayout(),
+              child: DashBoardMobileLayout(),
             )),
         SizedBox(
           width: 32,

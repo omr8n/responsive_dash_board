@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_dash_board/utils/size_config.dart';
+import 'package:responsive_dash_board/views/widgets/custom_drawer.dart';
 
 import 'widgets/adaptive_layout.dart';
 import 'widgets/dashboard_desktop_layout.dart';
@@ -51,12 +53,27 @@ class DashBoardView extends StatefulWidget {
 }
 
 class _DashboardViewState extends State<DashBoardView> {
+  final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey();
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Title'),
-      ),
+      key: scaffoldkey,
+      appBar: MediaQuery.sizeOf(context).width < SizeConfig.tablet
+          ? AppBar(
+              backgroundColor: const Color(0xFFFAFAFA),
+              leading: IconButton(
+                onPressed: () {
+                  scaffoldkey.currentState!.openDrawer();
+                },
+                icon: const Icon(Icons.menu),
+              ),
+            )
+          : null,
+      drawer: MediaQuery.sizeOf(context).width < SizeConfig.tablet
+          ? const CustomDrawer()
+          : null,
+      backgroundColor: const Color(0xFFF7f9FA),
       body: AdaptiveLayout(
         mobileLayout: (context) => const DashBoardMobileLayout(),
         tabletLayout: (context) => const DashBoardTabletLayout(),
